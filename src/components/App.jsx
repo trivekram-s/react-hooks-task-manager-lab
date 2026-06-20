@@ -1,23 +1,38 @@
-import React, { useEffect, useContext, useState } from "react";
-import { TaskContext } from "../context/TaskContext";
-import TaskForm from "./TaskForm";
-import SearchBar from "./SearchBar";
+
+import { useEffect, useState } from "react";
 
 function App() {
-  const [tasks, setTasks] = useState([]);
+  const [dogImage, setDogImage] = useState("");
+  const [loading, setLoading] = useState(true);
+
+  function fetchDog() {
+    setLoading(true);
+
+    fetch("https://dog.ceo/api/breeds/image/random")
+      .then((r) => r.json())
+      .then((data) => {
+        setDogImage(data.message);
+        setLoading(false);
+      });
+  }
 
   useEffect(() => {
-    fetch('http://localhost:6001/tasks')
-    .then(r=>r.json())
-    .then(data=>setTasks(data))
-    
+    fetchDog();
   }, []);
 
   return (
     <div>
-      <h1>Task Manager</h1>
-      <TaskForm />
-      <SearchBar />
+      <h1>Random Dog Generator</h1>
+
+      <button onClick={fetchDog}>
+        Get New Dog
+      </button>
+
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <img src={dogImage} alt="Random Dog" />
+      )}
     </div>
   );
 }

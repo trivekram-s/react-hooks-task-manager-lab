@@ -1,135 +1,77 @@
-# Lab: Task Manager
+# React Simple Data Fetching Lab
 
-## Overview
-In this lab, we’ll build a Task Manager application that allows users to add, complete, and search tasks. Utilizing the hooks of `useRef` to persist values without re-rendering, `useId` to generate unique IDs for accessibility and controlled components, and `useContext` for global state management.
+## Learning Goals
 
-## Task 1: Define the Problem
-The frontend is set up, but the application lacks interactivity and state management.
+- Use the `useEffect` hook to fetch data from an API and render to the page.
+- Use an event handler to fetch data from an API and render to the page.
 
-As a user, I should be able to:
-- Add a new task using a form (`useId`)
-- Mark tasks as completed (`useContext`)
-- Search tasks dynamically (`useRef`)
-
-## Task 2: Determine the Design
-Determine state and props needed for each component:
-- Global states (`useContext`)
-- Persistent Values (`useRef`)
-- Unique IDs (`useId`)
-
-## Task 3: Develop the Code
-### Implement Global State with `useContext`
-- Create `TaskProvider` as global state within `TaskContext.jsx`
-- Replace tasks state in app with context
-
-### Mark Task
-- Implement `toggleComplete` function within `TaskContext.jsx`
-- Call `toggleComplete` upon clicking task button
-
-### Submit Tasks
-- Apply `useId` on form input
-- Implement `addTask` function within `TaskContext.jsx`
-- Call `addTask` within submit
-
-### Implement Search Functionality
-- Implement `useRef` on search input
-- Implement filter on task context
-
-## Task 4: Test and Refine
-Debug and test during development using the provided test suite and React DevTools in Chrome.
-
-## Task 5: Document and Maintain
-- Commit as you go, writing meaningful commit messages
-- Push commit history to GitHub periodically and when lab is complete
-
-## Tools and Resources
-- GitHub Repo: 
-- `useRef`: [React useRef](https://react.dev/reference/react/useRef)
-- `useContext`: [React useContext](https://react.dev/reference/react/useContext)
-- `useId`: [React useId](https://react.dev/reference/react/useId)
-
-## Instructions
-### Set Up
-Before we begin coding, let's complete the initial setup for this lesson:
-
-#### Fork and Clone
-- Go to the provided GitHub repository link.
-- Fork the repository to your GitHub account.
-- Clone the forked repository to your local machine.
-
-#### Open and Run File
-- Open the project in VSCode.
-- Run `npm install` to install all necessary dependencies.
-
-## Instructions
-### Task 1: Define the Problem
-The frontend is set up, but the application lacks interactivity and state management.
-
-As a user, I should be able to:
-- Add a new task using a form (`useId`)
-- Mark tasks as completed (`useContext`)
-- Search tasks dynamically (`useRef`)
-
-### Task 2: Determine the Design
-Determine state and props needed for each component.
-
-### Task 3: Develop, Test, and Refine the Code
-#### Open React application in browser
-```sh
+## Getting Started
+- Fork this lab on GitHub and clone locally.
+- To run the lab:
+```bash
 npm run dev
 ```
-
-#### Run the included backend
-```sh
-npm run server
-```
-
-#### Run test suite
-```sh
+- To run the test suite:
+```bash
 npm run test
 ```
+- Commit and push your code as you go.
 
-### Create feature branch
-#### Implement Global State with `useContext`
-- Create `TaskProvider` as global state within `TaskContext.jsx`
-- Replace tasks state in app with context
-- Update `App` within `main.jsx` to be wrapped in `TaskProvider`
+## Deliverables
 
-#### Mark Task
-- Implement `toggleComplete` function within `TaskContext.jsx`
-- Ensure `toggleComplete` function edits both the `db.json` and page
-- Call `toggleComplete` upon clicking task button
+This lab is missing the `App` component that `index.js` is looking for. To pass
+the tests in this lab:
 
-#### Submit Tasks
-- Apply `useId` on form input
-- Implement `addTask` function within `TaskContext.jsx`
-- Call `addTask` within submit
+- Create an `App` component from scratch, along with any other components you 
+  choose for the component hierachy.
+- Use the `useEffect` hook in the `App` component. Inside the callback for
+  `useEffect`, send a `fetch` request to
+  `https://dog.ceo/api/breeds/image/random`, a free API that returns a random
+  image of a dog.
+- Display a `<p>` tag with the text of "Loading..." when the component is first
+  rendered
+- After receiving a response from the API, show the dog image in an `<img>` tag,
+  with the `alt` attribute set to "A Random Dog".
+  - For the test suite to work properly, this should be the only `<img>` tag in 
+  the application .
+- Create a `<button>` tag that, on click, fetches a new dog image and updates the 
+  dog image displayed.
+  - For the test suite to work properly, this should be the only `<button>` tag in 
+  the application .
 
-#### Implement Search Functionality
-- Implement `useRef` on search input
-- Implement filter task context on `TaskList`
-
-### Push feature branch and open a PR on GitHub
-- Merge to main
-
-## Task 4: Document and Maintain
-### Best Practice documentation steps:
-- Add comments to code to explain purpose and logic
-- Clarify intent/functionality of code to other developers
-- Add screenshot of completed work included in Markdown in `README.md`
-- Update `README.md` text to reflect the functionality of the application following [Make a README](https://makeareadme.com)
-- Delete any stale branches on GitHub
-- Remove unnecessary/commented-out code
-- If needed, update `.gitignore` to remove sensitive data
+## Lab Instructions
+### 1. Define the Problem
+* Load a random dog image on the page when the app first loads.
+* Allow the user to change the dog image by a button click.
+* Display a loading message for the user while waiting for API requests.
+### 2. Determine the Design
+* Determine Component Tree
+  * At minimum, you'll need an App component for the test suite
+* Determine state and props needed for each component
+### 3. Develop the Code
+* Open React application in browser
+```bash
+npm run dev
+```
+  - Run test suite
+```bash
+npm run test
+```
+* Create components and render
+* Manage component state and props
+* Implement useEffect and button with onClick
+* Add fetch requests to both the event handler and useEffect
+  * Fetch requests should make a GET request to “https://dog.ceo/api/breeds/image/random”
+* Update state accordingly to store the current dog image
+* Render the dog image in the jsx based on the data from the fetch request
+  * Be sure to look at how the data is formatted from the fetch request when setting the 
+  properties of the HTML image tag.
+### 4. Test and Refine 
+* Debugging and testing during coding using React DevTools in Chrome
+### 5. Document and Maintain 
+* Commit as you go, writing meaningful commit messages
+* Push commit history to GitHub periodically and when lab is complete
 
 ## Submission
-Once all tests are passing and working code is pushed to the GitHub main branch, submit your GitHub repo through Canvas using CodeGrade.
-
-## Grading Criteria
-The application passes all test suites.
-
-Ensure the application:
-- Loads tasks with context.
-- Submits new task with `useId`
-- Marks tasks as complete.
-- Filters tasks shown on the page by a search input.
+Once the lab is complete, all tests are passing, and you've pushed the completed code to 
+your forked repo on GitHub, submit your GitHub repo through Canvas using CodeGrade.
