@@ -1,26 +1,11 @@
-import React, { useContext,useState } from "react";
-import { TaskContext } from "../context/TaskContext";
 
-function TaskList({query}) {
-    const [tasks, setTasks] = useState([]);
-    const filteredTasks = tasks.filter(task =>
-    task.title.toLowerCase().includes(query.toLowerCase())
-  );
-
-  return (
-    <ul>
-      {filteredTasks.map((task) => (
-        <li key={task.id}>
-          <span style={{ textDecoration: task.completed ? "line-through" : "none" }}>
-            {task.title}
-          </span>
-          <button data-testid={task.id}>
-            {task.completed ? "Undo" : "Complete"}
-          </button>
-        </li>
-      ))}
-    </ul>
-  );
+import React,{useContext} from "react";
+import {TaskContext} from "../context/TaskContext";
+export default function TaskList({query}){
+ const {tasks,toggleComplete}=useContext(TaskContext);
+ const filtered=tasks.filter(t=>t.title.toLowerCase().includes(query.toLowerCase()));
+ return <ul>{filtered.map(task=><li key={task.id}>
+ <span style={{textDecoration:task.completed?"line-through":"none"}}>{task.title}</span>
+ <button data-testid={String(task.id)} onClick={()=>toggleComplete(task.id)}>{task.completed?"Undo":"Complete"}</button>
+ </li>)}</ul>
 }
-
-export default TaskList;
